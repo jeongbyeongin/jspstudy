@@ -45,6 +45,7 @@
 		<button id="btn">파라미터전송</button>
 	</div>
 	<script>
+
 		$('#btn').on('click', function(event){
 			// location.href = '/01_Servlet/GetServlet?model=tv&price=100';
 			open('/01_Servlet/GetServlet?model=tv&price=100');
@@ -52,7 +53,7 @@
 		
 	</script>
 	
-	<!-- 배열을 파라미터로 보내기 -->
+	<!-- 배열을 파라미터로 보내기 ( 같은 name이 여러개이고 체크박스를 여러개 선택하기때문에 배열로 보낸것이다-->
 	<div>
 		<form action="/01_Servlet/ArrayServlet">
 			<input type="text" name="tel" size="4" maxlength="3">

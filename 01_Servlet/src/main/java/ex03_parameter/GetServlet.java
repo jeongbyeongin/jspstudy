@@ -45,7 +45,6 @@ public class GetServlet extends HttpServlet {
 			
 		}
 		
-		
 		response.getWriter().append("model: " + model).append(", price: " + price);
 	}
 

@@ -48,6 +48,7 @@ public class DateTimeServlet extends HttpServlet {
 		out.flush();
 		out.close();
 		
+		
 //		LocalDateTime now = LocalDateTime.now();
 //		
 //		int year = now.getYear();

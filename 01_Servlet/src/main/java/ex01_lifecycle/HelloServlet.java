@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 */
 /*
 	URL
-	
+
 	1. 구성
 		프로토콜://호스트:포트번호/ContextPath/URLMapping
 		

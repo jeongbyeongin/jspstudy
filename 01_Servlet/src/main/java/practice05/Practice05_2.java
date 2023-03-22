@@ -17,12 +17,13 @@ public class Practice05_2 extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.setCharacterEncoding("UTF-8");
+request.setCharacterEncoding("UTF-8");
 		
 		// 냉장고 sysout으로 출력
 		String model = request.getParameter("model");
 		System.out.println("Practice05_2 : " + model);
 		
+		System.out.println(request.getServletContext().getRealPath("practice05"));		// practice05의 실제 경로를 알려달라 webapp에있는
 	}
 
 	
