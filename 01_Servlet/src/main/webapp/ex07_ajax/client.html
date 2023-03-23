@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../resources/js/lib/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+
+	<div>
+		<div>
+		<input type="text" id="model" placeholder="모델">
+		<input type="text" id="price" placeholder="가격">
+		<button id="btn1">텍스트요청</button>
+		</div>
+		<div id="content1"></div>
+	</div>
+	<script>
+		$('#btn1').on('click', function(){
+			$('#content1').empty();					// content 텍스트를 지운다. (한번 누를 때 원래 한개씩 추가가 되서 여러개 만들어지는데 empty(); 메소드를 넣으면 한개만 생성되고 추가되지않는다.)
+			$.ajax({
+				/* 요청 */
+				type: 'get', 						// 요청 메소드
+				url: '/01_Servlet/TextServlet',		// 요청 URL
+				data: 'model='+ $('#model').val() +'&price=' + $('#price').val(),		// 요청 파라미터
+				/* 응답 */
+				dataType: 'text',
+				success: (resData)=>{										// 성공 했을 때는 매개변수가 텍스트로 자동으로 넘어온다. 괄호에() 약속이다. 언제나 괄호안으로 온다.
+					$('#content1').append(resData);							// <div id="content1"></div> 를 적어준다,
+				},
+				error: (jqXHR)=>{											// 에러났을 때는 매개변수가 각종 예외 사유를 갖고있는 jqXHR이 자동으로 온다.
+					$('#content1').append($('<div>').text('status : ' + jqXHR.status));				// status 에러 코드번호 
+					$('#content1').append($('<div>').text('responseText : ' + jqXHR.responseText));	// (무슨) 에러 메시지 
+				}
+			})
+		})
+	</script>
+	
+	<div>
+		<form id="frm_person">
+			<input type="text" name="name" placeholder="이름">
+			<input type="text" name="age" placeholder="나이">
+			<input type="button" id="btn2" value="JSON요청">
+		</form>
+		<div id="content2"></div>		
+	</div>
+	<script>
+		$('#btn2').on('click', function(){
+			$('#content2').empty();
+			$.ajax({
+				/* 요청 */
+				type: 'get',
+				url: '/01_Servlet/JSONServlet',
+				data: $('#frm_person').serialize(),		// form 내부의 모든 입력 요소를 보냄 (name 속성이 파라미터로 인식된다.) name속성이 필수적으로 있어야한다. serialize !!
+				/* 응답 */
+				// 텍스트 형식으로 succcess: (resData)로 보냈으면 JSON.parse(resData)를 했었어야한다. 하지만 자동으로 변환해 주기때문에 해주지않아도된다.
+				dataType: 'json', 											    // 서블릿에서 response.setContentType("application/json; charset=UTF-8");
+				success: (resData)=>{	// resData == {"name":"마돈나", "age":50} = 객체 { } //  서블릿 출력에서 out.println(resData);
+					$('#content2').append($('<div>').text(resData.name));		// name 출력
+					$('#content2').append($('<div>').text(resData.age));		// age 출력 
+				},
+				error: (jqXHR)=>{											// 에러났을 때는 매개변수가 각종 예외 사유를 갖고있는 jqXHR이 자동으로 온다.
+					$('#content2').append($('<div>').text(jqXHR.status));
+					$('#content2').append($('<div>').text(jqXHR.responseText));
+				}
+				
+			})
+		})
+	</script>
+	
+	<div>
+		<form id="frm_book">
+			<input type="text" name="title" placeholder="제목">
+			<input type="text" name="author" placeholder="저자">
+			<input type="text" name="price" placeholder="가격">
+			<input type="button" id="btn3" value="XML요청">
+		</form>
+		<div id=content3></div>
+	</div>
+	<script>
+		$('#btn3').on('click', function(){
+			$('#content3').empty();		// 내용물 비우기
+			$.ajax({
+				/* 요청 */
+				type: 'get',
+				url: '/01_Servlet/XMLServlet',
+				data: $('#frm_book').serialize(),	// 보내줄 파라미터 들
+				/* 응답 */
+				dataType: 'xml',					// 응답 할 데이타 타입 xml
+				success: (resData)=>{				// resData = xml 데이터
+					var ul = $('<ul>'); 						// ul태그 안에 저장하기 힘들어서 변수로 저장한다.
+					ul.append($('<li>').text('제목: ' + $(resData).find('title').text()));		// resData는 일반객체이기 때문에 jquery로 묶어준다 // find('title').text() title의 텍스트 제목을 찾기위해서 텍스트를 사용
+					ul.append($('<li>').text('저자: ' + $(resData).find('author').text()));		// find = 하위태그를 찾는것
+					ul.append($('<li>').text('가격: ' + $(resData).find('price').text()));	// ul태그안에 li안에 resData에 제목 저자 가격의 텍스트를 뽑아온다.
+					$('#content3').append(ul);
+				}
+			
+			})
+		})
+	</script>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</body>
+</html>
