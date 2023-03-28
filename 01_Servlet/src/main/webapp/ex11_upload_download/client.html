@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../resources/js/lib/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+
+	<div>
+		<!-- 파일 첨부폼 필수 속성!!:  method="post" enctype="multipart/form-data -->
+		<form id="frm_upload" action="/01_Servlet/UploadServlet" method="post" enctype="multipart/form-data">
+			<div>
+				<label for="uploader">작성자</label>
+				<input type="text" id="uploader" name="uploader">	
+			</div>
+			<div>
+				<label for="filename">파일첨부</label>
+				<input type="file" id="filename" name="filename">
+			</div>
+			<div>
+				<button>첨부하기</button>
+				<input type="reset" value="다시작성">
+			</div>
+		</form>	
+	</div>
+	<script>
+		$('#filename').on('change', function(){
+		
+			// 파일 확장자 제한하기
+			var filename = $(this).val(); // 첨부된 파일명
+			var extname = filename.substring(filename.lastIndexOf('.') + 1).toLowerCase();	 // 첨부된 파일 확장자(소문자로 변환)
+			// lastIndexOf('.') = .을 찾고 substring + 1 은 .빼고 그 다음부터 끝까지 가져와라 /toLowerCase 소문자로 변환하는 함수
+			var acceptList = ['jpg', 'jpeg', 'png', 'gif', 'tif']; // 허용할 확장자 목록  
+			
+			if($.inArray(extname, acceptList) == -1){	// 이미지 확장자가 아니면
+				alert('이미지만 첨부할 수 있습니다.');
+				$(this).val('');	// 첨부된 파일이 없어진다 (빈 문자열로 바꿨기때문에)
+				return;
+			}
+			
+			// 파일 크기 제한하기
+			var filesize = this.file[0].size; // 첨부된 파일크기 /콘솔에서 확인 / this = 프로퍼티확인하는 거라서 jquery사용안해도됨
+			var maxsize = 1024 * 1024 * 10;		 // 최대 크기 (10MB)
+			if(filesize > maxsize){
+				alert('첨부파일의 최대 크기는 10MB입니다.');
+				$(this).val('');
+				return;
+			}
+		})
+		
+	</script>
+
+</body>
+</html>
