@@ -1,3 +1,6 @@
+<%@page import="ex06_el.Book"%>
+<%@page import="java.util.Map"%>
+<%@page import="java.util.HashMap"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -74,6 +77,36 @@
 	 	<li>${x eq 5 and y eq 2}</li>
 	 	<li>${x eq 6 or y eq 2}</li>
 	 	<li>${not (x eq 5)}</li>
+	 </ul>
+	 
+	 <%-- Map 사용하기 --%>
+	 <%
+	 	Map<String, Object> book = new HashMap<>();
+	 	book.put("author", "생택쥐베리");
+	 	book.put("title", "어린왕자");
+	 	book.put("price", 10000);
+	 	pageContext.setAttribute("book", book); // EL 사용을 위해서 pageContext에 저장한다.
+	 %>
+	 
+	 <ul>
+	 	<li>저자: ${book.author}</li>
+	 	<li>제목: ${book.title}</li>
+	 	<li>가격: ${book.price}</li>
+	 </ul>
+	 
+	 <%-- 객체 사용하기 --%>
+	 <%
+	 	Book book2 = new Book();
+		book2.setAuthor("황순원");
+		book2.setTitle("소나기");
+	 	book2.setPrice(10000);
+	 	pageContext.setAttribute("book2", book2);
+	 %>
+	 
+	 <ul>
+	 	<li>저자: ${book2.author}</li>	<%-- 자동으로 ${book2.getAuthor()}가 호출되어 실행된다. --%>
+	 	<li>제목: ${book2.title}</li>	<%-- 자동으로 ${book2.getTitle()}가 호출되어 실행된다. --%>
+	 	<li>가격: ${book2.price}</li>	<%-- 자동으로 ${book2.getPrice()}가 호출되어 실행된다. --%>
 	 </ul>
 	 
 
