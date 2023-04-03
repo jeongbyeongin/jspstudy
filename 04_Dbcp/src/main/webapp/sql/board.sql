@@ -16,4 +16,3 @@ CREATE TABLE BOARD (
 -- 행(ROW)
 INSERT INTO BOARD VALUES(BOARD_SEQ.NEXTVAL, '[공지]월요일알림', 'DBCP는 DataBase Connection Poll을 의미한다.', NULL, SYSDATE);
 INSERT INTO BOARD VALUES(BOARD_SEQ.NEXTVAL, '[협조]내일준비물', '물감, 리코더, 공책 가져오기', NULL, SYSDATE);
-COMMIT

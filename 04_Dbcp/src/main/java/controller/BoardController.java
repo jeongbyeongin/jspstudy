@@ -16,7 +16,7 @@ import service.BoardRemoveService;
 import service.IBoardService;
 
 
-@WebServlet("*.do")	// getAllBoardList.do	 getBoardByNo.do	addBoard.do		modifyBoard.do   removeBoard.do  == URLMapping
+@WebServlet("*.do")	// getAllBoardList.do	 getBoardByNo.do  writeBoard.do	 addBoard.do	modifyBoard.do   removeBoard.do  == URLMapping
 
 public class BoardController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -56,6 +56,9 @@ public class BoardController extends HttpServlet {
 			break;
 		case "/removeBoard.do":
 			service = new BoardRemoveService();
+			break;
+		case "/writeBoard.do":
+			af = new ActionForward("board/write.jsp", false);  // board 폴더 아래 write.jsp로 forward한다. (단순 이동의 경우 forward한다.) 
 			break;
 		}
 		
