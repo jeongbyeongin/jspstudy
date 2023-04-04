@@ -117,7 +117,37 @@ public class BoardDAO {
 	// 게시글 삽입하기
 	public int insertBoard(BoardDTO board) {
 		
-		return 0;
+		// 1. 삽입 결과 변수 선언
+		int insertResult = 0;
+		
+		try {
+			
+			// 2. DataSource로부터 Connection 얻어 오기
+			con = dataSource.getConnection();
+			
+			// 3. 실행할 쿼리문	( ? = 변수처리)
+			sql = "INSERT INTO BOARD VALUES(BOARD_SEQ.NEXTVAL, ?, ?, NULL, SYSDATE)";
+			
+			// 4. 쿼리문을 실행할 PreparedStatement 객체 생성
+			ps = con.prepareStatement(sql);
+			
+			// 5. 쿼리문에 변수 값 전달하기
+			ps.setString(1, board.getTitle());   // board 1 == 1번째 물음표(?)에 title 전달하기
+			ps.setString(2, board.getContent()); // board 2 == 2번째 물음표(?)에 content 전달하기
+		
+			// 6. PreparedStatement 객체를 이용해 쿼리문 실행(INSERT문 실행은 executeUpdate 메소드로 한다.)
+			// 결과값이 0 아니면 1이 나온 것이다.
+			insertResult = ps.executeUpdate();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			// 예외 발생 여부와 상관 없이 항상 자원의 반납을 해야 한다.
+			close();
+		}
+		
+		// 7. 삽입 결과 반환
+		return insertResult;
 		
 	}
 	
@@ -131,7 +161,35 @@ public class BoardDAO {
 	// 게시글 삭제하기
 	public int deleteBoard(int board_no) {
 		
-		return 0;
+		// 1. 삭제 결과 변수 선언
+		int deleteResult = 0;
+		
+		try {
+			
+			// 2. DataSource로부터 Connection 얻어 오기
+			con = dataSource.getConnection();
+			
+			// 3. 실행할 쿼리문	( ? = 변수처리)
+			sql = "DELETE FROM BOARD WHERE BOARD_NO = ?";
+			
+			// 4. 쿼리문을 실행할 PreparedStatement 객체 생성
+			ps = con.prepareStatement(sql);
+			
+			// 5. 쿼리문에 변수 값 전달하기
+			ps.setInt(1, board_no);   // board 1 == 1번째 물음표(?)에 title 전달하기
+		
+			// 6. PreparedStatement 객체를 이용해 쿼리문 실행(DELETE문 실행은 executeUpdate 메소드로 한다.)
+			// 결과값이 0 아니면 1이 나온 것이다.
+			deleteResult = ps.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			// 예외 발생 여부와 상관 없이 항상 자원의 반납을 해야 한다.
+			close();
+		}
+		
+		// 7. 삭제 
+		return deleteResult;
 		
 	}
 	
