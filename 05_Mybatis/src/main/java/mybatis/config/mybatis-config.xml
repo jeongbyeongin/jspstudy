@@ -33,7 +33,7 @@
 	  
   	  <!-- mapper 경로 설정하기 -->
   	  <mappers>
-    	  <mapper resource="mybatis/mapper/*.xml" />
+    	  <mapper resource="mybatis/mapper/bbs.xml" />
   	  </mappers>
   	  
   	  

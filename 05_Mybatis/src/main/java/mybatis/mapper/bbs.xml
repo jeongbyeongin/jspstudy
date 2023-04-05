@@ -7,21 +7,21 @@
 <mapper namespace="mybatis.mapper.bbs">
 
 	<!-- 목록(보기) // selectAllBbsList 모든 bbs목록을 가져오라-->
-	<select id="selectAllBbsList">
+	<select id="selectAllBbsList" resultType="Bbs">
 		SELECT BBS_NO, TITLE, CONTENT, MODIFIED_DATE, CREATED_DATE
 		  FROM BBS
 		 ORDER BY BBS_NO DESC
 	</select>
 	
 	<!-- 상세 -->
-	<select id="selectBbsByNo">
+	<select id="selectBbsByNo" parameterType="int" resultType="Bbs">
 		SELECT BBS_NO, TITLE, CONTENT, MODIFIED_DATE, CREATED_DATE
 		  FROM BBS
 		 WHERE BBS_NO = #{bbsNo}
 	</select>
 	
 	<!-- 삽입 -->
-	<insert id="insertBbs">
+	<insert id="insertBbs" parameterType="Bbs">		
 		INSERT INTO BBS
 			(BBS_NO, TITLE, CONTENT, CREATED_DATE)
 		VALUES
@@ -29,7 +29,7 @@
 	</insert>
 	
 	<!-- 수정 -->
-	<update id="updateBbs">
+	<update id="updateBbs" parameterType="Bbs">
 		UPDATE BBS
 		   SET TITLE = #{title}
 		     , CONTENT = #{content}
@@ -38,7 +38,7 @@
 	</update>
 	
 	<!-- 삭제 -->
-	<delete id="deleteBbs">
+	<delete id="deleteBbs" parameterType="int">
 		DELETE
 		  FROM BBS
 		 WHERE BBS_NO = #{bbsNo}	
