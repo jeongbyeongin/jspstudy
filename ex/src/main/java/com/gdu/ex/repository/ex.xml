@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<!--
+	namespace는 mapper가 있는 패키지와 mapper 이름으로 만든다.
+-->
+<mapper namespace="com.gdu.ex.repository.ex">
+
+	<select id="list" resultType="Ex">
+		SELECT EX_NO, EX_CONTENT, EX_CREATED_AT
+		  FROM EX
+	</select>
+	
+	<select id="detail" parameterType="int" resultType="Ex">
+		SELECT EX_NO, EX_CONTENT, EX_CREATED_AT
+		  FROM EX	
+		 WHERE EX_NO = #{exNo}	
+	</select>
+  	
+  	
+</mapper>

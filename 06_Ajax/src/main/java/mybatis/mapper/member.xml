@@ -34,7 +34,7 @@
 	</insert>
 	
 	<!-- 수정 -->
-	<update id="updateMember">
+	<update id="updateMember" parameterType="Member">
 		UPDATE MEMBER
 		   SET NAME = #{name}
 		     , GENDER = #{gender}
@@ -43,7 +43,7 @@
 	</update>
 	
 	<!-- 삭제 -->
-	<delete id="deleteMember">
+	<delete id="deleteMember" parameterType="int">
 		DELETE
 		  FROM MEMBER
 		 WHERE MEMBER_NO = #{memberNo}

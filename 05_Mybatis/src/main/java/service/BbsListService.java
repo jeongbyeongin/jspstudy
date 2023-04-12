@@ -11,7 +11,6 @@ public class BbsListService implements IBbsService {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
 		request.setAttribute("bbsList", BbsDAO.getInstance().selectAllBbsList());
-		
 		return new ActionForward("bbs/list.jsp", false);
 	}
 

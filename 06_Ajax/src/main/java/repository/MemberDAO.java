@@ -45,7 +45,7 @@ public class MemberDAO {
 	// 전체 회원 수
 	public int getMemberCount() {
 		SqlSession ss = factory.openSession();
-		int count = ss.selectOne(NS + "getMemberCoutnt"); 	// mybatis.mapper.member == NS에 들어가있는 것 + getMemberCoutnt (id)
+		int count = ss.selectOne(NS + "getMemberCount"); 	// mybatis.mapper.member == NS에 들어가있는 것 + getMemberCoutnt (id)
 		ss.close();
 		return count;
 	}
