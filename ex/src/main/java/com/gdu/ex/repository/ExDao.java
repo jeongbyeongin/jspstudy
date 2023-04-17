@@ -64,6 +64,35 @@ public class ExDao {
 		return result;
 	}
 	
+	public int save(ExDto ex) {
+		SqlSession ss = factory.openSession(false);	// commit 코드를 직접 넣겠다.
+		int result = ss.insert(NS + "save", ex);	// insert의 결과 값은 int이다. 1개 삽입 했으면 성공 0개나오면 실패.
+		if(result == 1) {
+			ss.commit();
+		}
+		ss.close();
+		return result;
+	}
+	
+	public int remove(int exNo) {
+		SqlSession ss = factory.openSession(false);		// 삭제가 성공했는지를 보고 commit하겠다.
+		int result = ss.delete(NS + "remove", exNo);	// 아이디 remove, 파라미터(exNo)
+		if(result == 1) {
+			ss.commit();
+		}
+		ss.close();
+		return result;
+	}
+	public int update(ExDto exdto) {
+		SqlSession ss = factory.openSession(false);
+		int result = ss.update(NS + "update", exdto);
+		if(result == 1) {
+			ss.commit();
+		}
+		ss.close();
+		return result;
+	}
+	
 	
 	
 	

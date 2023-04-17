@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <!-- '.'를 이용해서 경로를 지정하기 때문에 확장자의 입력은 생략한다. -->
+  
+<mapper namespace="repository.xe"> <!-- bbs파일을 의미 -->
+
+	<select id="list" resultType="Xe">
+		SELECT XE_NO, XE_CONTENT, XE_CREATED_AT
+		  FROM XE
+		 ORDER BY XE_NO DESC 
+	</select>
+	
+	
+
+  	
+  	
+</mapper>

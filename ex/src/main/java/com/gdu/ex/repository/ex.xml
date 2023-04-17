@@ -15,9 +15,38 @@
 	
 	<select id="detail" parameterType="int" resultType="Ex">
 		SELECT EX_NO, EX_CONTENT, EX_CREATED_AT
-		  FROM EX	
-		 WHERE EX_NO = #{exNo}	
+		  FROM EX
+		 WHERE EX_NO = #{exNo}
 	</select>
-  	
+	
+	<insert id="save" parameterType="Ex">
+		INSERT INTO EX
+		VALUES(EX_SEQ.NEXTVAL, #{exContent}, SYSTIMESTAMP)
+	</insert>
+	
+	<delete id="remove" parameterType="int">
+		DELETE
+		  FROM EX
+		 WHERE EX_NO = #{exNo}
+	</delete>
+	
+	<update id="update" parameterType="Ex">
+		UPDATE EX
+		   SET EX_CONTENT = #{exContent}
+		     , EX_CREATED_AT = SYSTIMESTAMP
+		 WHERE EX_NO = #{exNo}
+	</update>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
   	
 </mapper>
